@@ -68,17 +68,13 @@ export function Workspace({ exercise, topic, nextExerciseId, initial, language: 
   const [sketchOpen, setSketchOpen] = useState(false);
   const [sketchMounted, setSketchMounted] = useState(false);
   const openSketch = (open: boolean) => { setSketchOpen(open); if (open) setSketchMounted(true); };
-  const [dark, setDark] = useState(false);
   const [stage, setStage] = useState<Stage>(
     initial.status === "done" || initial.status === "waiting_retry" ? "breakdown"
       : initial.planDone ? "code"
       : initial.planChat.length > 0 ? "plan"
       : "problem",
   );
-  useEffect(() => {
-    setDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }, []);
-  // The sidebar's Sketchpad link toggles this exercise's sketchpad.
+  // The top bar's Sketchpad link toggles this exercise's sketchpad.
   useEffect(() => {
     const toggle = () => { setSketchMounted(true); setSketchOpen((o) => !o); };
     window.addEventListener(OPEN_SKETCHPAD, toggle);
@@ -199,7 +195,7 @@ export function Workspace({ exercise, topic, nextExerciseId, initial, language: 
   const retryPending = status === "retry_due" && !retryStarted && planDone;
 
   return (
-    <main className="flex flex-col lg:h-screen">
+    <main className="flex flex-col lg:h-full">
       {/* Header: where you are in the Exercise */}
       <header className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-line bg-panel px-6 py-3">
         <div className="grid min-w-0 gap-0.5">
@@ -360,7 +356,7 @@ export function Workspace({ exercise, topic, nextExerciseId, initial, language: 
                 onChange={(v) => setCode(v ?? "")}
                 onMount={onMount}
                 options={{ minimap: { enabled: false }, fontSize: 15, fontFamily: "var(--font-code), monospace", scrollBeyondLastLine: false, readOnly: !editable, tabSize: 2 }}
-                theme={dark ? "vs-dark" : "light"}
+                theme="light"
               />
             </div>
             <Markdown text={lang.note} className="text-xs text-muted" />

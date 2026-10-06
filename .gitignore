@@ -55,3 +55,4 @@ next-env.d.ts
 # unfinished curriculum phases (renamed back when their exercises are complete)
 /curriculum/_wip-*/
 __pycache__/
+/.impeccable/

@@ -7,13 +7,11 @@ import { saveSketch } from "@/app/actions";
 
 // Loaded only in the browser (see Workspace): Excalidraw needs `window`.
 export default function SketchPad({ exerciseId, initialScene }: { exerciseId: string; initialScene: string | null }) {
-  const [dark, setDark] = useState(false);
   const [saved, setSaved] = useState<"saved" | "saving" | "unsaved">("saved");
   const lastVersion = useRef<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
-    setDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
     return () => clearTimeout(timer.current);
   }, []);
 
@@ -36,7 +34,7 @@ export default function SketchPad({ exerciseId, initialScene }: { exerciseId: st
       <div className="panel min-h-[480px] flex-1 overflow-hidden">
         <Excalidraw
           initialData={initialData}
-          theme={dark ? "dark" : "light"}
+          theme="light"
           UIOptions={{ canvasActions: { loadScene: false, saveToActiveFile: false, export: { saveFileToDisk: true } } }}
           onChange={(elements, appState, files) => {
             const version = getSceneVersion(elements);

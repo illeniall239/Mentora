@@ -7,7 +7,7 @@ import { exerciseStatus, localToday } from "@/lib/progress.ts";
 import { threadFor } from "@/lib/tutor.ts";
 import { markTeachDone } from "@/app/actions.ts";
 import { Chat } from "@/components/Chat";
-import { dotClass } from "@/components/Sidebar";
+import { dotClass } from "@/lib/status-ui.ts";
 import { ExtraPractice } from "@/components/ExtraPractice";
 import { loadExtras } from "@/lib/extras.ts";
 import { projectReviews } from "@/lib/db.ts";
@@ -32,7 +32,7 @@ export default async function TopicPage(props: PageProps<"/topics/[id]">) {
   }
 
   return (
-    <main className="grid gap-6 p-6 lg:h-screen lg:grid-cols-[minmax(0,1fr)_340px] xl:px-10">
+    <main className="grid gap-6 p-6 lg:h-full lg:grid-cols-[minmax(0,1fr)_340px] xl:px-10">
       <section className="flex min-h-[70vh] flex-col gap-4 lg:min-h-0">
         <header className="grid gap-1">
           <p className="eyebrow">Topic {topic.id} · lesson</p>

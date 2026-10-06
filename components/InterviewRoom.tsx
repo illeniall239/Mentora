@@ -33,16 +33,11 @@ export function InterviewRoom({ id, label, minutes, editor, startedAt, language,
   const [feedback, setFeedback] = useState(initialFeedback);
   const [error, setError] = useState<string | null>(null);
   const [ending, startEnding] = useTransition();
-  const [dark, setDark] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const ended = !!feedback;
   const elapsed = useElapsed(startedAt, ended);
   const left = minutes * 60 - elapsed;
   const clock = (s: number) => `${Math.floor(Math.abs(s) / 60)}:${String(Math.abs(s) % 60).padStart(2, "0")}`;
-
-  useEffect(() => {
-    setDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }, []);
 
   useEffect(() => {
     if (!editor || ended || code === initialCode) return;
@@ -74,7 +69,7 @@ export function InterviewRoom({ id, label, minutes, editor, startedAt, language,
   );
 
   return (
-    <main className="flex flex-col lg:h-screen">
+    <main className="flex flex-col lg:h-full">
       <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line bg-panel px-6 py-3">
         <div className="grid gap-0.5">
           <p className="eyebrow"><Link href="/interview" className="hover:underline">Interview practice</Link></p>
@@ -102,7 +97,7 @@ export function InterviewRoom({ id, label, minutes, editor, startedAt, language,
                 value={code}
                 onChange={(v) => setCode(v ?? "")}
                 options={{ minimap: { enabled: false }, fontSize: 15, fontFamily: "var(--font-code), monospace", scrollBeyondLastLine: false, readOnly: ended, tabSize: 2 }}
-                theme={dark ? "vs-dark" : "light"}
+                theme="light"
               />
             </div>
           </div>

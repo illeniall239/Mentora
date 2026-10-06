@@ -10,7 +10,7 @@ export default async function RecapPage() {
   const summary = await todaySummary();
   const messages = getMessages(threadFor("recap", "")).map((m) => ({ role: m.role, content: m.content, provider: m.provider }));
   return (
-    <main className="grid gap-6 p-6 lg:h-screen lg:grid-cols-[minmax(0,1fr)_340px] xl:px-10">
+    <main className="grid gap-6 p-6 lg:h-full lg:grid-cols-[minmax(0,1fr)_340px] xl:px-10">
       <section className="flex min-h-[70vh] flex-col gap-4 lg:min-h-0">
         <header className="grid gap-1">
           <p className="eyebrow">End of Session</p>

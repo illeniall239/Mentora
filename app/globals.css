@@ -1,49 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --ground: #eef1ec;
-  --panel: #fafbf8;
-  --ink: #18201c;
-  --muted: #5b665f;
-  --line: #d3d9d2;
-  --accent: #1f6f5c;
-  --accent-soft: #dcebe5;
+  /* Dusk Light (pencil: Mentora — Dusk Light), light only */
+  --ground: #f4f5f8;
+  --panel: #ffffff;
+  --subtle: #ebeef4;
+  --ink: #171b22;
+  --muted: #6a7384;
+  --line: #dde1ea;
+  --accent: #4f62c8;
+  --accent-soft: #4f62c81f;
+  --accent-line: #4f62c840;
   --warn: #8a5a00;
   --warn-soft: #f5ead2;
   --bad: #a33a2b;
   --bad-soft: #f6e1dc;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ground: #121714;
-    --panel: #1a201c;
-    --ink: #e4eae5;
-    --muted: #99a69e;
-    --line: #2e3832;
-    --accent: #5fc2a7;
-    --accent-soft: #1e332c;
-    --warn: #e0b45a;
-    --warn-soft: #33291a;
-    --bad: #f08a78;
-    --bad-soft: #3a221e;
-  }
-}
-
 @theme inline {
   --color-ground: var(--ground);
   --color-panel: var(--panel);
+  --color-subtle: var(--subtle);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-line: var(--accent-line);
   --color-warn: var(--warn);
   --color-warn-soft: var(--warn-soft);
   --color-bad: var(--bad);
   --color-bad-soft: var(--bad-soft);
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-code), ui-monospace, Consolas, monospace;
+  --font-logo: var(--font-logo-face), Georgia, serif;
 }
 
 body {
@@ -52,12 +42,12 @@ body {
 }
 
 @layer components {
-  .panel { @apply rounded-xl border border-line bg-panel; }
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-md border border-line px-3 py-2 text-sm font-semibold transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-primary { @apply border-accent bg-accent text-panel hover:opacity-90; }
-  .field { @apply rounded-md border border-line bg-ground px-3 py-2 text-[15px] text-ink placeholder:text-muted; }
-  .eyebrow { @apply font-mono text-[11px] font-semibold uppercase tracking-widest text-accent; }
-  .chip { @apply inline-flex items-center rounded px-1.5 py-0.5 font-mono text-[11px] font-semibold; }
+  .panel { @apply rounded-2xl border border-line bg-panel; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-[10px] border border-line bg-panel px-4 py-2.5 text-[13.5px] font-bold transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply border-accent bg-accent text-ground hover:opacity-90; }
+  .field { @apply rounded-[10px] border border-line bg-ground px-3 py-2 text-[15px] text-ink placeholder:text-muted; }
+  .eyebrow { @apply text-[10.5px] font-extrabold uppercase tracking-[0.09em] text-muted; }
+  .chip { @apply inline-flex items-center rounded-[6px] px-2 py-0.5 text-[10.5px] font-bold; }
   :focus-visible { @apply outline-2 outline-offset-2 outline-accent; }
 }
 
