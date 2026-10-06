@@ -5,7 +5,7 @@ export async function GET() {
   return new Response(JSON.stringify({ exportedAt: new Date().toISOString(), ...exportAll() }, null, 2), {
     headers: {
       "Content-Type": "application/json",
-      "Content-Disposition": `attachment; filename="poopy-backup-${localToday()}.json"`,
+      "Content-Disposition": `attachment; filename="mentora-backup-${localToday()}.json"`,
       "Cache-Control": "no-store",
     },
   });

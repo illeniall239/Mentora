@@ -20,7 +20,7 @@ export function Sidebar({ collapsed = false }: { collapsed?: boolean }) {
     return (
       <aside className="hidden flex-col items-center gap-4 border-r border-line bg-panel py-4 lg:flex lg:h-screen">
         <SidebarToggle collapsed />
-        <span className="font-display text-lg font-bold" title="Poopy">P</span>
+        <span className="font-display text-lg font-bold" title="Mentora">M</span>
         <div className="h-24 w-1.5 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuenow={done} aria-valuemax={exercises.size} aria-label="Exercises done" title={`${done}/${exercises.size} exercises`}>
           <div className="w-full rounded-full bg-accent" style={{ height: `${(done / exercises.size) * 100}%` }} />
         </div>
@@ -33,7 +33,7 @@ export function Sidebar({ collapsed = false }: { collapsed?: boolean }) {
     <aside className="flex flex-col gap-6 border-line bg-panel p-4 lg:h-screen lg:overflow-y-auto lg:overflow-x-hidden lg:border-r">
       <div className="flex items-start justify-between gap-2 pl-3 pt-2">
         <div className="grid gap-0.5">
-          <span className="font-display text-xl font-bold">Poopy</span>
+          <span className="font-display text-xl font-bold">Mentora</span>
         </div>
         <SidebarToggle collapsed={false} />
       </div>

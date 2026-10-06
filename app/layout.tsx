@@ -9,7 +9,7 @@ const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-disp
 const body = Source_Sans_3({ subsets: ["latin"], variable: "--font-body" });
 const code = JetBrains_Mono({ subsets: ["latin"], variable: "--font-code" });
 
-export const metadata: Metadata = { title: "Poopy", description: "Poopy, your personal programming tutor" };
+export const metadata: Metadata = { title: "Mentora", description: "Mentora, your personal programming tutor" };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   await connection(); // the sidebar shows live progress
