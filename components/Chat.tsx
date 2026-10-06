@@ -32,11 +32,20 @@ export function Chat({ kind, id, initial, autoStart = false, placeholder = "Repl
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
+  const box = useRef<HTMLTextAreaElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
     bottom.current?.scrollIntoView({ block: "end" });
   }, [messages]);
+
+  // The box grows with the draft so a long question stays visible start to finish; the CSS max-height caps it.
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight + el.offsetHeight - el.clientHeight}px`; // + the borders, since height is border-box
+  }, [draft]);
 
   async function send(message?: string) {
     setBusy(true);
@@ -107,7 +116,14 @@ export function Chat({ kind, id, initial, autoStart = false, placeholder = "Repl
               {m.role === "learner" ? "You" : "Tutor"}
               {m.provider && <span className="rounded bg-line px-1.5 py-px font-mono normal-case tracking-normal">{m.provider}</span>}
             </div>
-            {m.content ? <Markdown text={m.content} /> : <p className="animate-pulse text-sm text-muted">Thinking…</p>}
+            {!m.content ? (
+              <p className="animate-pulse text-sm text-muted">Thinking…</p>
+            ) : m.role === "learner" ? (
+              // The Learner's own words, exactly as typed: their line breaks are part of the question.
+              <p className="whitespace-pre-wrap text-[15px] leading-relaxed">{m.content}</p>
+            ) : (
+              <Markdown text={m.content} />
+            )}
           </div>
         ))}
         <div ref={bottom} />
@@ -131,8 +147,9 @@ export function Chat({ kind, id, initial, autoStart = false, placeholder = "Repl
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) submit(e); }}
           placeholder={placeholder}
+          ref={box}
           rows={2}
-          className="field flex-1 resize-none"
+          className="field max-h-[50vh] min-h-[4.5rem] flex-1 resize-none overflow-y-auto"
         />
         <MicButton onText={(t) => setDraft((d) => (d.trim() ? `${d.trimEnd()} ${t}` : t))} />
         <button type="submit" disabled={busy || !draft.trim()} className="btn btn-primary self-end">Send</button>
